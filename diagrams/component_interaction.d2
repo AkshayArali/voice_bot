@@ -1,0 +1,61 @@
+direction: down
+
+Mic: USB Microphone
+PvRecorder: PvRecorder
+Porcupine: Porcupine
+Whisper: Whisper
+MainLoop: Main Control Loop
+
+Webcam: USB Webcam
+FrameBuffer: FrameBuffer
+MediaPipe: MediaPipe
+GeminiVision: Gemini Vision
+
+Gemma: Gemma LLM
+ROSPublisher: ROS 2 Publisher
+Create3: Create3 Robot
+
+Mic -> PvRecorder: ALSA
+PvRecorder -> Porcupine
+PvRecorder -> Whisper: WAV
+
+Webcam -> FrameBuffer: OpenCV
+FrameBuffer -> MediaPipe
+FrameBuffer -> GeminiVision
+
+Porcupine -> MainLoop: Wake Event
+Whisper -> MainLoop: Text
+
+MainLoop -> Gemma: Text
+Gemma -> MainLoop: Intent
+
+MediaPipe -> MainLoop: Person Pose
+GeminiVision -> MainLoop: Description
+
+MainLoop -> ROSPublisher: Twist
+ROSPublisher -> Create3: /cmd_vel
+
+classes: {
+  box: {
+    style: {
+      border-radius: 8
+      fill: "#ffffff"
+      stroke: "#333333"
+      stroke-width: 2
+      shadow: true
+    }
+  }
+}
+
+Mic.class: box
+PvRecorder.class: box
+Porcupine.class: box
+Whisper.class: box
+MainLoop.class: box
+Webcam.class: box
+FrameBuffer.class: box
+MediaPipe.class: box
+GeminiVision.class: box
+Gemma.class: box
+ROSPublisher.class: box
+Create3.class: box

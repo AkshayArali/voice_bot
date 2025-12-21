@@ -1,0 +1,33 @@
+direction: right
+
+Mic: USB Microphone
+Pi: Raspberry Pi 5
+Cam: USB Webcam
+Speaker: Speaker (USB/BT)
+Create3: iRobot Create3
+Wheels: Wheels & Sensors
+
+Mic -> Pi
+Cam -> Pi
+Speaker -> Pi
+Pi -> Create3: Ethernet/WiFi
+Create3 -> Wheels
+
+classes: {
+  box: {
+    style: {
+      border-radius: 8
+      fill: "#ffffff"
+      stroke: "#333333"
+      stroke-width: 2
+      shadow: true
+    }
+  }
+}
+
+Mic.class: box
+Pi.class: box
+Cam.class: box
+Speaker.class: box
+Create3.class: box
+Wheels.class: box

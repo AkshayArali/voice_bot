@@ -1,0 +1,48 @@
+direction: down
+
+Text: Transcribed Text
+Prompt: System Prompt + User Input
+Gemma: Gemma 3 1B LLM
+JSON: JSON Response
+Router: Intent Router
+
+Text -> Prompt
+Prompt -> Gemma
+Gemma -> JSON: Generation
+JSON -> Router
+
+RouterLogic: {
+  Follow: follow_me
+  Move: movement_sequence
+  Describe: describe_surroundings
+  style: {
+      fill: "#f3f4f6"
+      stroke: "#d1d5db"
+      stroke-width: 2
+  }
+}
+
+Router -> RouterLogic.Follow
+Router -> RouterLogic.Move
+Router -> RouterLogic.Describe
+
+classes: {
+  box: {
+    style: {
+      border-radius: 8
+      fill: "#ffffff"
+      stroke: "#333333"
+      stroke-width: 2
+      shadow: true
+    }
+  }
+}
+
+Text.class: box
+Prompt.class: box
+Gemma.class: box
+JSON.class: box
+Router.class: box
+RouterLogic.Follow.class: box
+RouterLogic.Move.class: box
+RouterLogic.Describe.class: box

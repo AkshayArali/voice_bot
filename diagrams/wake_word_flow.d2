@@ -1,0 +1,38 @@
+direction: down
+
+Mic: Microphone
+PvRecorder: PvRecorder
+Porcupine: Porcupine Engine
+WakeDetected: Wake Detected? {
+  shape: diamond
+}
+Stop: Stop Listening
+StartWhisper: Start Whisper ASR
+Continue: Continue Listening
+
+Mic -> PvRecorder: PCM Audio
+PvRecorder -> Porcupine: Frame
+Porcupine -> WakeDetected: Result >= 0
+WakeDetected -> Stop: Yes
+Stop -> StartWhisper
+WakeDetected -> Continue: No
+
+classes: {
+  box: {
+    style: {
+      border-radius: 8
+      fill: "#ffffff"
+      stroke: "#333333"
+      stroke-width: 2
+      shadow: true
+    }
+  }
+}
+
+Mic.class: box
+PvRecorder.class: box
+Porcupine.class: box
+WakeDetected.class: box
+Stop.class: box
+StartWhisper.class: box
+Continue.class: box

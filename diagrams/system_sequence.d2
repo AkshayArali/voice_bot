@@ -1,0 +1,22 @@
+shape: sequence_diagram
+
+User: User
+Mic: Mic
+Porcupine: Porcupine
+Whisper: Whisper
+Gemma: Gemma
+Router: Router
+Vision: Vision
+ROS: ROS
+Create3: Create3
+
+User -> Mic: Say "computer"
+Mic -> Porcupine: Audio frames
+Porcupine -> Whisper: Wake detected
+Whisper -> Gemma: Transcript
+Gemma -> Router: Intent JSON
+Router -> Vision: If follow/describe
+Vision -> Router: Pose/description
+Router -> ROS: Publish /cmd_vel
+ROS -> Create3: Motor commands
+Create3 -> User: Movement + spoken response

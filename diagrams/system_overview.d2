@@ -1,0 +1,86 @@
+direction: down
+
+Voice: Human Voice
+Mic: Microphone
+Wake: "Wake Word: 'computer'"
+Whisper: Whisper ASR
+Gemma: "Intent Parser (Gemma)"
+Router: Intent Router {
+  shape: diamond
+}
+Follow: Follow Controller
+Vision: Gemini Vision
+Move: Movement Executor
+Stop: Stop Command
+Speak: Speak Response
+ROS: ROS 2 /cmd_vel
+Robot: iRobot Create3
+
+Voice -> Mic
+Mic -> Wake
+Wake -> Whisper: Detected
+Whisper -> Gemma: Text
+Gemma -> Router: Intent
+
+Router -> Follow: "follow me"
+Router -> Vision: "describe"
+Router -> Move: "move"
+Router -> Stop: "stop"
+
+Vision -> Speak
+
+Follow -> ROS
+Move -> ROS
+Stop -> ROS
+
+ROS -> Robot
+
+Perception: {
+  Mic
+  Wake
+  Whisper
+  Gemma
+  style: {
+    fill: "#f3f4f6"
+    stroke: "#d1d5db"
+    stroke-width: 2
+  }
+}
+
+Action: {
+  Follow
+  Vision
+  Move
+  Robot
+  style: {
+    fill: "#e0f2fe"
+    stroke: "#93c5fd"
+    stroke-width: 2
+  }
+}
+
+classes: {
+  box: {
+    style: {
+      border-radius: 8
+      fill: "#ffffff"
+      stroke: "#333333"
+      stroke-width: 2
+      shadow: true
+    }
+  }
+}
+
+Voice.class: box
+Mic.class: box
+Wake.class: box
+Whisper.class: box
+Gemma.class: box
+Router.class: box
+Follow.class: box
+Vision.class: box
+Move.class: box
+Stop.class: box
+Speak.class: box
+ROS.class: box
+Robot.class: box

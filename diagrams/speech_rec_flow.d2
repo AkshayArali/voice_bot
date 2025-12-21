@@ -1,0 +1,30 @@
+direction: down
+
+Wake: Wake Detected
+Record: Record 6s Audio
+Whisper: Whisper Tiny Model
+Transcribe: Transcribe Text
+Intent: Intent Parser
+
+Wake -> Record
+Record -> Whisper: WAV File
+Whisper -> Transcribe: Processing
+Transcribe -> Intent: Text Output
+
+classes: {
+  box: {
+    style: {
+      border-radius: 8
+      fill: "#ffffff"
+      stroke: "#333333"
+      stroke-width: 2
+      shadow: true
+    }
+  }
+}
+
+Wake.class: box
+Record.class: box
+Whisper.class: box
+Transcribe.class: box
+Intent.class: box

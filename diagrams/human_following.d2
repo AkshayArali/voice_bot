@@ -1,0 +1,62 @@
+direction: down
+
+Cam: Camera 320x240 @ 15FPS
+Pipeline: Detection Pipeline
+
+Detection: {
+  MP: MediaPipe Pose
+  HOG: OpenCV HOG Fallback
+  Person: Person Detection
+  
+  MP -> Person: Full Body
+  HOG -> Person: Partial Body
+}
+
+Pipeline -> Detection.MP
+Pipeline -> Detection.HOG
+
+Detection.Person -> Controller: BBox, Center, Area
+
+Controller: Follow Controller
+
+Control_Logic: {
+  TurnLeft: Turn Left
+  TurnRight: Turn Right
+  Forward: Move Forward/Back
+}
+
+Controller -> Control_Logic.TurnLeft: "Diff < -0.1"
+Controller -> Control_Logic.TurnRight: "Diff > +0.1"
+Controller -> Control_Logic.Forward: "Area Target"
+
+ROS: ROS 2 /cmd_vel
+Motors: Create3 Motors
+
+Control_Logic.TurnLeft -> ROS
+Control_Logic.TurnRight -> ROS
+Control_Logic.Forward -> ROS
+ROS -> Motors
+
+classes: {
+  box: {
+    style: {
+      border-radius: 8
+      fill: "#ffffff"
+      stroke: "#333333"
+      stroke-width: 2
+      shadow: true
+    }
+  }
+}
+
+Cam.class: box
+Pipeline.class: box
+Detection.MP.class: box
+Detection.HOG.class: box
+Detection.Person.class: box
+Controller.class: box
+Control_Logic.TurnLeft.class: box
+Control_Logic.TurnRight.class: box
+Control_Logic.Forward.class: box
+ROS.class: box
+Motors.class: box

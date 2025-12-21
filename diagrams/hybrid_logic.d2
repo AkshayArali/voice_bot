@@ -1,0 +1,41 @@
+direction: down
+
+Frame: Input Frame
+MP: MediaPipe Pose
+Found: Found? {
+  shape: diamond
+}
+Use: Use Detection
+HOG: HOG Detector
+HOGFound: Found? {
+  shape: diamond
+}
+None: No Person Detected
+
+Frame -> MP
+MP -> Found
+Found -> Use: Yes
+Found -> HOG: No
+HOG -> HOGFound
+HOGFound -> Use: Yes
+HOGFound -> None: No
+
+classes: {
+  box: {
+    style: {
+      border-radius: 8
+      fill: "#ffffff"
+      stroke: "#333333"
+      stroke-width: 2
+      shadow: true
+    }
+  }
+}
+
+Frame.class: box
+MP.class: box
+Found.class: box
+Use.class: box
+HOG.class: box
+HOGFound.class: box
+None.class: box

@@ -1,0 +1,41 @@
+direction: down
+
+P5: Raspberry Pi 5 {
+  Porcupine: Porcupine Wake Word
+  Whisper: Whisper ASR
+  Gemma: Gemma 3 Intent
+  MediaPipe: MediaPipe Pose
+  Controller: main.py Controller
+  ROSNode: ROS 2 Node
+}
+
+Robot: {
+  Create3: iRobot Create3
+}
+
+P5.Porcupine -> P5.Controller
+P5.Whisper -> P5.Controller
+P5.Gemma -> P5.Controller
+P5.MediaPipe -> P5.Controller
+P5.Controller -> P5.ROSNode
+P5.ROSNode -> Robot.Create3: /cmd_vel
+
+classes: {
+  box: {
+    style: {
+      border-radius: 8
+      fill: "#ffffff"
+      stroke: "#333333"
+      stroke-width: 2
+      shadow: true
+    }
+  }
+}
+
+P5.Porcupine.class: box
+P5.Whisper.class: box
+P5.Gemma.class: box
+P5.MediaPipe.class: box
+P5.Controller.class: box
+P5.ROSNode.class: box
+Robot.Create3.class: box

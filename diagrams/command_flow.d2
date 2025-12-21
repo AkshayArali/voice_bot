@@ -1,0 +1,44 @@
+direction: down
+
+Phase1: "Phase 1: IDLE" {
+  Listening
+  WakeDetected: "\"computer\"?"
+  
+  Listening -> WakeDetected
+  WakeDetected -> Listening: No
+}
+
+Phase2: "Phase 2: LISTENING" {
+  Capture: espeak "Yes?"
+  Record: arecord 6s
+  Whisper: Transcribe
+  CommandText: "follow me"
+  
+  Capture -> Record
+  Record -> Whisper
+  Whisper -> CommandText
+}
+
+Phase3: "Phase 3: UNDERSTANDING" {
+  Gemma: Intent Parsing
+  Router: JSON Output
+  
+  Gemma -> Router
+}
+
+Phase4: "Phase 4: ACTION" {
+  Following: "follow_me"
+  Movement: "movement_sequence"
+  Vision: "describe"
+  
+  Following -> Detect -> Control -> Move -> Detect
+  Movement -> Parse -> Execute -> Stop
+  Vision -> Snap -> Analyze -> Speak
+}
+
+Phase1.WakeDetected -> Phase2.Capture: Yes
+Phase2.CommandText -> Phase3.Gemma
+Phase3.Router -> Phase4.Following
+Phase3.Router -> Phase4.Movement
+Phase3.Router -> Phase4.Vision
+Phase4 -> Phase1.Listening: Command Complete

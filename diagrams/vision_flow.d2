@@ -1,0 +1,40 @@
+direction: down
+
+User: "User: 'What do you see?'"
+Capture: Capture Frame
+API: Gemini Vision API
+
+Cloud_API: {
+  Model: Gemini Flash Model
+  Response: Text Response
+}
+
+TTS: Text-to-Speech (espeak)
+Audio: Spoken Output
+
+User -> Capture
+Capture -> API: JPEG
+API -> Cloud_API.Model: Prompt + Image
+Cloud_API.Model -> Cloud_API.Response: Description
+Cloud_API.Response -> TTS
+TTS -> Audio
+
+classes: {
+  box: {
+    style: {
+      border-radius: 8
+      fill: "#ffffff"
+      stroke: "#333333"
+      stroke-width: 2
+      shadow: true
+    }
+  }
+}
+
+User.class: box
+Capture.class: box
+API.class: box
+Cloud_API.Model.class: box
+Cloud_API.Response.class: box
+TTS.class: box
+Audio.class: box

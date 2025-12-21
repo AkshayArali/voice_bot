@@ -1,0 +1,38 @@
+direction: down
+
+Raspberry_Pi: {
+  Node: RobotController Node
+  Topic: "Topic: /cmd_vel"
+}
+
+Create3_Robot: {
+  C3Node: Create3 ROS 2 Node
+  Motion: Motion Controller
+  Wheels: Wheel Motors
+}
+
+Raspberry_Pi.Node -> Raspberry_Pi.Topic: Twist Message
+Raspberry_Pi.Topic -> Create3_Robot.C3Node: DDS Network
+Create3_Robot.C3Node -> Create3_Robot.Motion: Subscriber
+Create3_Robot.Motion -> Create3_Robot.Wheels: Kinematics
+
+note: "linear.x (m/s)\nangular.z (rad/s)"
+Raspberry_Pi.Topic -- note
+
+classes: {
+  box: {
+    style: {
+      border-radius: 8
+      fill: "#ffffff"
+      stroke: "#333333"
+      stroke-width: 2
+      shadow: true
+    }
+  }
+}
+
+Raspberry_Pi.Node.class: box
+Raspberry_Pi.Topic.class: box
+Create3_Robot.C3Node.class: box
+Create3_Robot.Motion.class: box
+Create3_Robot.Wheels.class: box
